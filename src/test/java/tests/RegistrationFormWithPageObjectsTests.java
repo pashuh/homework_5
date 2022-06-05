@@ -3,33 +3,27 @@ package tests;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import pages.RegistrationFormPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class TextBoxTests {
-
-
+public class RegistrationFormWithPageObjectsTests extends TestBase{
 
     @Test
     void successfulTest() {
         String firstName = "Pol";
         String lastName = "Vood";
 
-        open("/automation-practice-form");
-        executeJavaScript("$('footer').remove()");
-        executeJavaScript("$('#fixedban').remove()");
+        registrationFormPage.openPage()
+            .setFirstName(firstName)
+            .setlastName(lastName)
+            .setuserEmail("PV@gm.com")
+            .setGender("Male");
 
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#userEmail").setValue("PV@gm.com");
-        $(byText("Male")).click();
         $("#userNumber").setValue("9990001122");
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__year-select").selectOption("1986");
-        $(".react-datepicker__month-select").selectOption("September");
-        $("[aria-label= 'Choose Tuesday, September 30th, 1986']").click();
+        registrationFormPage.setDateOfBirth("30", "July", "1997");
         $("#subjectsInput").setValue("Chemistry").pressEnter();
         $("#currentAddress").setValue("Moscow");
         $(byText("Music")).click();
@@ -38,10 +32,11 @@ public class TextBoxTests {
         $("#react-select-3-input").setValue("Rajasthan").pressEnter();
         $("#react-select-4-input").setValue("Jaipur").pressEnter();
         $("#submit").click();
-        $(".modal-body").shouldHave(text("Pol Vood"), text("PV@gm.com"), text("Male"),
-                text("9990001122"), text("30 September,1986"), text("Chemistry"), text("Music"),
-                text("Screen.jpg"), text("Zvereva 22"), text("Rajasthan Jaipur")
-        );
+        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+        registrationFormPage
+                .checkResult("Student Name", firstName + " " + lastName)
+                .checkResult("Student Email", "PV@gm.com")
+                .checkResult("Date of Birth", "30 July,1997");
     }
 
 }
