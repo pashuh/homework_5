@@ -1,5 +1,7 @@
 package pages;
 
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import pages.components.CalenderComponent;
 import pages.components.ResultsTableComponent;
 
@@ -12,6 +14,8 @@ public class RegistrationFormPage {
 
     CalenderComponent calenderComponent = new CalenderComponent();
     ResultsTableComponent resultsTableComponent = new ResultsTableComponent();
+    SelenideElement firstNameUnput = $("#firstName"),
+    lastNameInput = $("#lastName");
 
     public RegistrationFormPage openPage() {
         open("/automation-practice-form");
@@ -22,14 +26,16 @@ public class RegistrationFormPage {
     }
 
     public RegistrationFormPage setFirstName(String value) {
-        $("#firstName").setValue(value);
+        firstNameUnput.setValue(value);
         return this;
     }
 
-    public RegistrationFormPage setlastName(String value) {
-        $("#lastName").setValue(value);
+
+    public RegistrationFormPage setLastName(String value) {
+        lastNameInput.setValue(value);
         return this;
     }
+
 
     public RegistrationFormPage setuserEmail(String value) {
         $("#userEmail").setValue(value);
@@ -37,7 +43,7 @@ public class RegistrationFormPage {
     }
 
     public RegistrationFormPage setGender(String value) {
-        $("genterWrapper").$(byText("Male")).click();
+        $("#genterWrapper").$(byText(value)).click();
         return this;
     }
 
@@ -47,14 +53,43 @@ public class RegistrationFormPage {
         return this;
     }
 
+
     public RegistrationFormPage checkResult (String key, String value) {
         resultsTableComponent.checkResult(key, value);
-
         return this;
-
     }
 
-
-
+    public RegistrationFormPage setNumber(String value) {
+        $("#userNumber").setValue(value);
+        return this;
+    }
+    public RegistrationFormPage setSubjects (String value) {
+        $("#subjectsInput").setValue(value).pressEnter();
+        return this;
+    }
+    public RegistrationFormPage setAddress (String value) {
+        $("#currentAddress").setValue(value);
+        return this;
+    }
+    public RegistrationFormPage setHobby (String value) {
+        $(byText(value)).click();
+        return this;
+    }
+    public RegistrationFormPage setLoad (String value) {
+        $("#uploadPicture").uploadFromClasspath(value);
+        return this;
+    }
+    public RegistrationFormPage setState (String value) {
+        $("#react-select-3-input").setValue(value).pressEnter();
+        return this;
+    }
+    public RegistrationFormPage setCity (String value) {
+        $("#react-select-4-input").setValue(value).pressEnter();
+        return this;
+    }
+    public RegistrationFormPage pressSub () {
+        $("#submit").click();
+        return this;
+    }
 
 }

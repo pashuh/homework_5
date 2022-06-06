@@ -11,6 +11,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationFormWithPageObjectsTests extends TestBase{
 
+
     @Test
     void successfulTest() {
         String firstName = "Pol";
@@ -18,25 +19,28 @@ public class RegistrationFormWithPageObjectsTests extends TestBase{
 
         registrationFormPage.openPage()
             .setFirstName(firstName)
-            .setlastName(lastName)
+            .setLastName(lastName)
             .setuserEmail("PV@gm.com")
-            .setGender("Male");
-
-        $("#userNumber").setValue("9990001122");
-        registrationFormPage.setDateOfBirth("30", "July", "1997");
-        $("#subjectsInput").setValue("Chemistry").pressEnter();
-        $("#currentAddress").setValue("Moscow");
-        $(byText("Music")).click();
-        $("#uploadPicture").uploadFromClasspath("Screen.jpg");
-        $("#currentAddress").setValue("Zvereva 22");
-        $("#react-select-3-input").setValue("Rajasthan").pressEnter();
-        $("#react-select-4-input").setValue("Jaipur").pressEnter();
-        $("#submit").click();
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        registrationFormPage
-                .checkResult("Student Name", firstName + " " + lastName)
-                .checkResult("Student Email", "PV@gm.com")
-                .checkResult("Date of Birth", "30 July,1997");
+            .setGender("Male")
+            .setNumber("9990001122")
+            .setDateOfBirth("30", "July", "1997")
+            .setSubjects("Chemistry")
+            .setHobby("Music")
+            .setLoad("Screen.jpg")
+            .setAddress("Revaz 22")
+            .setState("Rajasthan")
+            .setCity("Jaipur")
+            .pressSub()
+            .checkResult("Student Name", firstName + " " + lastName)
+            .checkResult("Student Email", "PV@gm.com")
+            .checkResult("Gender", "Male")
+            .checkResult("Mobile", "9990001122")
+            .checkResult("Date of Birth", "30 July,1997")
+            .checkResult("Subjects", "Chemistry")
+            .checkResult("Hobbies", "Music")
+            .checkResult("Picture", "Screen.jpg")
+            .checkResult("Address", "Revaz 22")
+            .checkResult("State and City", "Rajasthan Jaipur");
     }
 
 }
