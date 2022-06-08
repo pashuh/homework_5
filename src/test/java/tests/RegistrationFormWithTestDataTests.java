@@ -1,15 +1,10 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import pages.RegistrationFormPage;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
 
-public class RegistrationFormWithPageObjectsTests extends TestBase{
+
+public class RegistrationFormWithTestDataTests extends TestBase{
 
 
     @Test
