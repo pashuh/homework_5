@@ -3,8 +3,6 @@ package tests;
 import org.junit.jupiter.api.Test;
 
 public class TextBoxTests extends TestBase{
-
-
     @Test
     void successfulTest() {
         String firstName = "Pol";

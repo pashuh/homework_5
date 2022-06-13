@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class ResultsTableComponent {
 
-    public void checkResult (String key, String value) {
+    public void checkResult(String key, String value) {
 
         $(".table-responsive").$(byText(key))
                 .parent().shouldHave(text(value));
